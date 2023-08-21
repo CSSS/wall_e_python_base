@@ -25,5 +25,9 @@ RUN apk add --update alpine-sdk
 #     a required dependency when compiling Pillow from source.
 RUN apk add jpeg-dev
 
-COPY CI/server_scripts/build_wall_e/python-base-requirements.txt .
-RUN pip install --no-cache-dir -r python-base-requirements.txt
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+RUN apk add --update libffi-dev && \
+    apk --update add postgresql-client
