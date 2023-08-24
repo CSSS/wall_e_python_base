@@ -15,7 +15,7 @@ if [ -z "${DOCKER_HUB_USER_NAME}" ]; then
     exit 1
 fi
 
-docker system prune
+docker system prune -f
 export wall_e_bottom_base_image_dockerfile="Dockerfile"
 
 docker image rm -f "${WALL_E_PYTHON_BASE_IMAGE}" || true
@@ -28,4 +28,4 @@ docker push sfucsssorg/${WALL_E_PYTHON_BASE_IMAGE}
 
 docker rmi sfucsssorg/${WALL_E_PYTHON_BASE_IMAGE}
 docker image rm "${WALL_E_PYTHON_BASE_IMAGE}"
-docker system prune
+docker system prune -f
