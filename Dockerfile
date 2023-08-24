@@ -26,5 +26,10 @@ RUN apk add --update alpine-sdk
 RUN apk add jpeg-dev
 
 
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+
+
 RUN apk add --update libffi-dev && \
     apk --update add postgresql-client \
