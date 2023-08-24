@@ -32,4 +32,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 
 RUN apk add --update libffi-dev && \
-    apk --update add postgresql-client \
+    apk --update add postgresql-client
