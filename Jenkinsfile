@@ -22,6 +22,7 @@ pipeline {
                     sh label: '', script : """bash -c \'
                         export DOCKER_HUB_PASSWORD="'"${DOCKER_HUB_PASSWORD}"'";
                         export DOCKER_HUB_USER_NAME=${DOCKER_HUB_USER_NAME};
+                        export WALL_E_PYTHON_BASE_IMAGE=wall_e_python;
                         ./build.sh;
                     \'"""
                 }

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # required if the docker image needs to be created and cannot just use sfucsssorg/wall_e
 if [ -z "${WALL_E_PYTHON_BASE_IMAGE}" ]; then
     echo "WALL_E_PYTHON_BASE_IMAGE is not set"
@@ -14,13 +15,17 @@ if [ -z "${DOCKER_HUB_USER_NAME}" ]; then
     exit 1
 fi
 
-export wall_e_bottom_base_image="wall_e_python_base_image"
-export wall_e_bottom_base_image_dockerfile="CI/server_scripts/build_wall_e/Dockerfile.python_base"
+docker system prune
+export wall_e_bottom_base_image_dockerfile="Dockerfile"
 
-docker image rm -f "${wall_e_bottom_base_image}" || true
-docker build --no-cache -t ${wall_e_bottom_base_image} -f ${wall_e_bottom_base_image_dockerfile} .
-export WALL_E_BASE_ORIGIN_NAME="${wall_e_bottom_base_image}"
+docker image rm -f "${WALL_E_PYTHON_BASE_IMAGE}" || true
+docker build --no-cache -t ${WALL_E_PYTHON_BASE_IMAGE} -f ${wall_e_bottom_base_image_dockerfile} .
+export WALL_E_BASE_ORIGIN_NAME="${WALL_E_PYTHON_BASE_IMAGE}"
 
-docker tag ${wall_e_bottom_base_image} ${WALL_E_PYTHON_BASE_IMAGE}
+docker tag ${WALL_E_PYTHON_BASE_IMAGE} sfucsssorg/${WALL_E_PYTHON_BASE_IMAGE}
 echo "${DOCKER_HUB_PASSWORD}" | docker login --username=${DOCKER_HUB_USER_NAME} --password-stdin
-docker push ${WALL_E_PYTHON_BASE_IMAGE}
+docker push sfucsssorg/${WALL_E_PYTHON_BASE_IMAGE}
+
+docker rmi sfucsssorg/${WALL_E_PYTHON_BASE_IMAGE}
+docker image rm "${WALL_E_PYTHON_BASE_IMAGE}"
+docker system prune
