@@ -1,5 +1,12 @@
 FROM python:3.8.5-alpine
 
+ARG CONTAINER_HOME_DIR
+
+ENV CONTAINER_HOME_DIR=$CONTAINER_HOME_DIR
+
+WORKDIR $CONTAINER_HOME_DIR
+
+
 # pg_config is required to build psycopg2 from source.  Please add the directory
 #    containing pg_config to the $PATH or specify the full executable path with the
 #    option:
@@ -25,11 +32,13 @@ RUN apk add --update alpine-sdk
 #     a required dependency when compiling Pillow from source.
 RUN apk add jpeg-dev
 
+COPY layer-1-requirements.txt .
+RUN pip install --no-cache-dir -r layer-1-requirements.txt
+RUN rm layer-1-requirements.txt
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-
+COPY layer-2-requirements.txt .
 
 RUN apk add --update libffi-dev && \
+    pip install --no-cache-dir -r layer-2-requirements.txt &&  \
     apk --update add postgresql-client
+RUN rm layer-2-requirements.txt

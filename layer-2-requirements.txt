@@ -1,0 +1,5 @@
+discord.py[voice]==2.3.2
+yarl<1.2
+bs4
+parsedatetime==2.4
+aiohttp==3.8.5

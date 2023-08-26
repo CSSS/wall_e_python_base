@@ -19,7 +19,6 @@ export wall_e_bottom_base_image_dockerfile="Dockerfile"
 
 docker image rm -f "${WALL_E_PYTHON_BASE_IMAGE}" || true
 docker system prune -f --all
-docker builder prune
 docker build --no-cache -t ${WALL_E_PYTHON_BASE_IMAGE} -f ${wall_e_bottom_base_image_dockerfile} .
 export WALL_E_BASE_ORIGIN_NAME="${WALL_E_PYTHON_BASE_IMAGE}"
 
@@ -30,4 +29,3 @@ docker push sfucsssorg/${WALL_E_PYTHON_BASE_IMAGE}
 docker rmi sfucsssorg/${WALL_E_PYTHON_BASE_IMAGE}
 docker image rm "${WALL_E_PYTHON_BASE_IMAGE}"
 docker system prune -f --all
-docker builder prune
