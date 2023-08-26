@@ -3,3 +3,4 @@ numpy==1.23.0
 matplotlib==3.3.0
 
 discord.py[voice]==2.3.2
+yarl<1.2
