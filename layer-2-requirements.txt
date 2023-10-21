@@ -1,5 +1,6 @@
-discord.py[voice]==2.3.2
+# discord.py[voice]==2.3.2
 yarl<1.2
 bs4
 parsedatetime==2.4
 aiohttp==3.8.5
+git+https://github.com/Rapptz/discord.py@9e2f2cb3af30c9d4c6d3ff4f7850832c05488d6f#egg=discord.py[voice]
