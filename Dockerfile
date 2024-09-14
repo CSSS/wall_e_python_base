@@ -1,4 +1,12 @@
-FROM python:3.8.5-alpine
+FROM python:3.9.20-alpine
+# stuck at python:3.9.20-alpine because any higher and numpy throws the error
+#12.91   File "/tmp/pip-build-env-69sch6hw/overlay/lib/python3.12/site-packages/setuptools/__init__.py", line 10, in <module>
+#12.91     import distutils.core
+#12.91 ModuleNotFoundError: No module named 'distutils'
+#12.91
+# https://stackoverflow.com/a/77284076
+
+
 
 # pg_config is required to build psycopg2 from source.  Please add the directory
 #    containing pg_config to the $PATH or specify the full executable path with the
